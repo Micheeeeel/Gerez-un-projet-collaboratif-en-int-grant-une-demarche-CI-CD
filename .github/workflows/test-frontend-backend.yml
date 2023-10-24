@@ -48,21 +48,21 @@ jobs:
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - name: List coverage directory
         run: ls -la coverage/bobapp
-      - name: Run Sonar analysis
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          COVERAGE_REPORT_PATH: ./front/coverage/bobapp/report-lcovonly.txt
       - name: Check if coverage report exists
+        env:
+          COVERAGE_REPORT_PATH: ./front/coverage/bobapp/report-lcovonly.txt
         run: |
           if [ ! -f "$COVERAGE_REPORT_PATH" ]; then
             echo "⚠️ Warning: Coverage report not found at $COVERAGE_REPORT_PATH!"
           else
             echo "Coverage report found at $COVERAGE_REPORT_PATH."
           fi
+      - name: Run Sonar analysis
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: npm run sonar
-
 
   test-backend:
     runs-on: ubuntu-latest
