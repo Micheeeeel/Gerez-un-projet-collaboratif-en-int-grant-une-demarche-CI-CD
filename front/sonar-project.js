@@ -1,7 +1,7 @@
 const sonarqubeScanner = require("sonarqube-scanner");
 sonarqubeScanner(
   {
-    serverUrl: "http://localhost:9000",
+    serverUrl: process.env.SONAR_HOST_URL || "http://localhost:9000",
     token: "squ_a5177bdeab7985362d9985cd6354b2b75a81bd7d", // Ajoutez cette ligne
     options: {
       "sonar.sources": ".", // Indique que la racine du projet est le point de départ de l'analyse.
