@@ -1,5 +1,5 @@
 # Utilisation de l'image node:latest comme base pour le processus de construction.
-FROM node:latest as build
+FROM node:16 as build
 
 # Définit le répertoire de travail dans le conteneur.
 WORKDIR /usr/local/app
