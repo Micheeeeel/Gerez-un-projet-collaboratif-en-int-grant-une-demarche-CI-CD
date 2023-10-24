@@ -148,11 +148,11 @@ jobs:
         run: |
           cd front  # Change le répertoire courant pour accéder au dossier 'front'.
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/bobapp_frontend:latest -f Dockerfile .  # Construit l'image Docker en utilisant le Dockerfile dans le dossier 'front'.
-          docker push ${{ secrets.DOCKERHUB_TOKEN }}/nom_du_depot_frontend:latest  # Pousse l'image construite sur Docker Hub.
+          docker push ${{ secrets.DOCKERHUB_TOKEN }}/bobapp_frontend:latest  # Pousse l'image construite sur Docker Hub.
 
       # Cette étape construit l'image Docker pour le backend et la pousse sur Docker Hub.
       - name: Build and push backend Docker image
         run: |
           cd back  # Change le répertoire courant pour accéder au dossier 'back'.
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/bobapp_backend:latest -f Dockerfile .  # Construit l'image Docker en utilisant le Dockerfile dans le dossier 'back'.
-          docker push ${{ secrets.DOCKERHUB_TOKEN }}/nom_du_depot_backend:latest  # Pousse l'image construite sur Docker Hub.
+          docker push ${{ secrets.DOCKERHUB_TOKEN }}/bobapp_backend:latest  # Pousse l'image construite sur Docker Hub.
