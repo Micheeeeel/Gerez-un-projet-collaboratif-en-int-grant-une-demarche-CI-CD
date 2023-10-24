@@ -7,6 +7,7 @@ sonarqubeScanner(
       "sonar.sources": ".", // Indique que la racine du projet est le point de départ de l'analyse.
       "sonar.inclusions": "src/**", // Spécifie que seuls les fichiers sous le répertoire packages/core/src/ doivent être inclus dans l'analyse.
       "sonar.javascript.lcov.reportPaths":
+        process.env.COVERAGE_REPORT_PATH ||
         "coverage/bobapp/report-lcovonly.txt",
     },
   },
