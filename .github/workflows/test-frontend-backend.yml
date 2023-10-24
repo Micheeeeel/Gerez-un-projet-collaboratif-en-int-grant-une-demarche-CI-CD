@@ -42,13 +42,27 @@ jobs:
           cache: "npm"
           cache-dependency-path: front/package-lock.json
       - run: npm ci
+      - name: Ensure coverage directory exists
+        run: mkdir -p coverage/bobapp
+      - name: Run tests and generate coverage report
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+      - name: List coverage directory
+        run: ls -la coverage/bobapp
       - name: Run Sonar analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           COVERAGE_REPORT_PATH: ./front/coverage/bobapp/report-lcovonly.txt
+      - name: Check if coverage report exists
+        run: |
+          if [ ! -f "$COVERAGE_REPORT_PATH" ]; then
+            echo "⚠️ Warning: Coverage report not found at $COVERAGE_REPORT_PATH!"
+          else
+            echo "Coverage report found at $COVERAGE_REPORT_PATH."
+          fi
         run: npm run sonar
+
 
   test-backend:
     runs-on: ubuntu-latest
