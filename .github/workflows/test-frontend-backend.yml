@@ -124,3 +124,30 @@ jobs:
         run: |
           cd back
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
+  build-and-push-docker-images:
+    runs-on: ubuntu-latest
+    steps:
+      # Cette étape permet de se connecter à Docker Hub.
+      - name: Login to Docker Hub
+        if: success() # Cette condition s'assure que cette étape est exécutée uniquement si les étapes précédentes ont réussi.
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # Utilise le nom d'utilisateur Docker Hub stocké en tant que secret dans GitHub.
+          password: ${{ secrets.DOCKERHUB_TOKEN }} # Utilise le mot de passe Docker Hub stocké en tant que secret dans GitHub.
+
+      # Cette étape construit l'image Docker pour le frontend et la pousse sur Docker Hub.
+      - name: Build and push frontend Docker image
+        if: success() # Cette condition s'assure que cette étape est exécutée uniquement si les étapes précédentes ont réussi.
+        run: |
+          cd front  # Change le répertoire courant pour accéder au dossier 'front'.
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/bobapp_frontend:latest -f Dockerfile .  # Construit l'image Docker en utilisant le Dockerfile dans le dossier 'front'.
+          docker push ${{ secrets.DOCKERHUB_TOKEN }}/nom_du_depot_frontend:latest  # Pousse l'image construite sur Docker Hub.
+
+      # Cette étape construit l'image Docker pour le backend et la pousse sur Docker Hub.
+      - name: Build and push backend Docker image
+        if: success() # Cette condition s'assure que cette étape est exécutée uniquement si les étapes précédentes ont réussi.
+        run: |
+          cd back  # Change le répertoire courant pour accéder au dossier 'back'.
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/bobapp_backend:latest -f Dockerfile .  # Construit l'image Docker en utilisant le Dockerfile dans le dossier 'back'.
+          docker push ${{ secrets.DOCKERHUB_TOKEN }}/nom_du_depot_backend:latest  # Pousse l'image construite sur Docker Hub.
