@@ -1,0 +1,6 @@
+projectKey=bobapp
+serverUrl=https://b28e-2a01-e0a-2d-a090-41d3-2457-aed5-3965.ngrok-free.app
+serverVersion=10.2.1.78527
+dashboardUrl=https://b28e-2a01-e0a-2d-a090-41d3-2457-aed5-3965.ngrok-free.app/dashboard?id=bobapp
+ceTaskId=AYtg5lllaLpwacgQz9fM
+ceTaskUrl=https://b28e-2a01-e0a-2d-a090-41d3-2457-aed5-3965.ngrok-free.app/api/ce/task?id=AYtg5lllaLpwacgQz9fM
