@@ -136,6 +136,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }} # Utilise le nom d'utilisateur Docker Hub stocké en tant que secret dans GitHub.
           password: ${{ secrets.DOCKERHUB_TOKEN }} # Utilise le mot de passe Docker Hub stocké en tant que secret dans GitHub.
 
+      # pour débugger, on affiche le contenu du répertoire courant
+      - name: List directory contents
+        run: ls -la
+
       # Cette étape construit l'image Docker pour le frontend et la pousse sur Docker Hub.
       - name: Build and push frontend Docker image
         if: success() # Cette condition s'assure que cette étape est exécutée uniquement si les étapes précédentes ont réussi.
