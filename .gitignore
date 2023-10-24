@@ -39,3 +39,4 @@ build/
 .mvn
 
 .angular
+back/output.log
