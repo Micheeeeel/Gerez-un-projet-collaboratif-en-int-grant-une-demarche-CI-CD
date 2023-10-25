@@ -1,4 +1,4 @@
-name: Test Both Frontend and Backend
+name: Test and analyse Both Frontend and Backend and then Build and Push Docker Images
 
 # garantir que la CI s'exécute à l'ouverture/màj des PR ainsi que pour les màj importantes des branches principales.
 on:
