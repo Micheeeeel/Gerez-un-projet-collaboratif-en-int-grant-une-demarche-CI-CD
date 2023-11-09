@@ -42,7 +42,6 @@ module.exports = function (config) {
           type: "lcovonly",
           subdir: ".",
           file: "report-lcovonly.txt", // Ceci est essentiel pour notre intégration avec GitHub Actions.
-          // Il produit un seul fichier lcov qui sera utilisé par `phoenix-actions/test-reporting`.
         },
       ],
     },
